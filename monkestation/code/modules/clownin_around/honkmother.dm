@@ -29,11 +29,6 @@
 	/// A weak ref in case an admin removes the component to preserve the functionality.
 	var/datum/weakref/singularity
 
-	var/list/souls_needed = list()
-	var/soul_goal = 0
-	var/souls = 0
-	var/resolved = FALSE
-
 /obj/honkmother/Initialize(mapload)
 	. = ..()
 
@@ -49,3 +44,6 @@
 		roaming = TRUE, \
 		singularity_size = HONKMOTHER_SINGULARITY_SIZE, \
 	))
+
+	send_to_playing_players(span_honkmother("!!! THE HONKMOTHER DESCENDS !!!"))
+	sound_to_playing_players('sound/effects/superfart.ogg')
