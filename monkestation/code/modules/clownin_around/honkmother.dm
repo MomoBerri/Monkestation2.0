@@ -1,4 +1,3 @@
-#define HONKMOTHER_CHANCE_TO_PICK_NEW_TARGET 5
 #define HONKMOTHER_CONSUME_RANGE 10
 #define HONKMOTHER_GRAV_PULL 10
 #define HONKMOTHERSINGULARITY_SIZE 12
@@ -45,5 +44,12 @@
 		singularity_size = HONKMOTHERSINGULARITY_SIZE, \
 	))
 
+	desc = ("That's the Honkomther. Rejoice, for she has arrived.")
 	send_to_playing_players(span_honkmother("!!! THE HONKMOTHER DESCENDS !!!"))
 	sound_to_playing_players('monkestation/sound/effects/superfart.ogg')
+
+	var/area/area = get_area(src)
+	if(area)
+		var/mutable_appearance/alert_overlay = mutable_appearance('monkestation/icons/hud/actions.dmi', "honkmother_alert")
+		notify_ghosts("The Honkkmother has risen in [area]. Reach out to the Lady to be awarded a new mirthful form!", source = src, \
+					alert_overlay = alert_overlay, action = NOTIFY_ATTACK)
