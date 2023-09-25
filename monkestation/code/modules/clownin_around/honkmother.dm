@@ -42,8 +42,8 @@
 		disregard_failed_movements = TRUE, \
 		grav_pull = HONKMOTHER_GRAV_PULL, \
 		roaming = TRUE, \
-		singularity_size = HONKMOTHER_SINGULARITY_SIZE, \
+		singularity_size = HONKMOTHERSINGULARITY_SIZE, \
 	))
 
 	send_to_playing_players(span_honkmother("!!! THE HONKMOTHER DESCENDS !!!"))
-	sound_to_playing_players('sound/effects/superfart.ogg')
+	sound_to_playing_players('monkestation/sound/effects/superfart.ogg')
