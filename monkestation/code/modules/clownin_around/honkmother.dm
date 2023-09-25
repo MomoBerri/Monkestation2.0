@@ -46,7 +46,7 @@
 
 	desc = ("That's the Honkomther. Rejoice, for she has arrived.")
 	send_to_playing_players(span_honkmother("!!! THE HONKMOTHER DESCENDS !!!"))
-	sound_to_playing_players('monkestation/sound/effects/superfart.ogg')
+	sound_to_playing_players('monkestation/sound/effects/honkmother_descends.ogg')
 
 	var/area/area = get_area(src)
 	if(area)
