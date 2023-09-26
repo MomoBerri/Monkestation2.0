@@ -2,6 +2,8 @@
 
 #define HONKMOTHER_CONSUME_RANGE 10
 #define HONKMOTHER_GRAV_PULL 10
+#define NARSIE_MESMERIZE_CHANCE 25
+#define NARSIE_MESMERIZE_EFFECT 60
 #define HONKMOTHER_SINGULARITY_SIZE 12
 
 // The honkmother, the Deity of Clowns
@@ -30,6 +32,8 @@
 	var/datum/weakref/singularity
 
 /obj/honkmother/Initialize(mapload)
+	. = ..()
+
 	SSpoints_of_interest.make_point_of_interest(src)
 
 	singularity = WEAKREF(AddComponent(
@@ -39,7 +43,7 @@
 		consume_range = HONKMOTHER_CONSUME_RANGE, \
 		disregard_failed_movements = TRUE, \
 		grav_pull = HONKMOTHER_GRAV_PULL, \
-		roaming = TRUE, \
+		roaming = FALSE, /* This is set once the animation finishes */ \
 		singularity_size = HONKMOTHER_SINGULARITY_SIZE, \
 	))
 
@@ -50,15 +54,19 @@
 
 	var/area/area = get_area(src)
 	if(area)
-		var/mutable_appearance/alert_overlay = mutable_appearance('monkestation/icons/hud/actions.dmi', "honkmother_alert")
-		notify_ghosts("The Honkkmother has risen in [area]. Reach out to the Lady to be awarded a new mirthful form!", source = src, alert_overlay = alert_overlay, action = NOTIFY_ATTACK)
+		var/mutable_appearance/alert_overlay = mutable_appearance('monkestation/icons/obj/clock_cult/clockwork_effects.dmi', "ratvar_alert")
+		notify_ghosts("The Honkmother has risen in [area]. Reach out to the Lady to be awarded a new mirthful form!", source = src, alert_overlay = alert_overlay, action = NOTIFY_ATTACK)
 	narsie_spawn_animation()
 
 /obj/honkmother/attack_ghost(mob/user)
 	makeNewConstruct(/mob/living/simple_animal/hostile/construct/harvester, user, cultoverride = TRUE, loc_override = loc)
 
-/obj/honkmother/process()
-		var/datum/component/singularity/singularity_component = singularity.resolve()
+/// Stun people around Honkmother
+/obj/Honkmother/proc/mesmerize()
+	for (var/mob/living/carbon/victim in viewers(HONKMOTHER_CONSUME_RANGE, src))
+		if (victim.stat == CONSCIOUS)
+			to_chat(victim, span_cult("You feel conscious thought crumble away in an instant as you gaze upon [src]..."))
+			victim.apply_effect(NARSIE_MESMERIZE_EFFECT, EFFECT_STUN)
 
 /obj/honkmother/Bump(atom/the_atom)
 	var/turf/the_turf = get_turf(the_atom)
@@ -68,7 +76,7 @@
 
 /obj/honkmother/proc/consume(atom/target)
 	if (isturf(target))
-		target.honkmother_act()
+		target.narsie_act()
 
 /obj/honkmother/proc/narsie_spawn_animation()
 	setDir(SOUTH)
