@@ -43,7 +43,7 @@
 		consume_range = HONKMOTHER_CONSUME_RANGE, \
 		disregard_failed_movements = TRUE, \
 		grav_pull = HONKMOTHER_GRAV_PULL, \
-		roaming = FALSE, /* This is set once the animation finishes */ \
+		roaming = TRUE, \
 		singularity_size = HONKMOTHER_SINGULARITY_SIZE, \
 	))
 
@@ -65,7 +65,7 @@
 /obj/Honkmother/proc/mesmerize()
 	for (var/mob/living/carbon/victim in viewers(HONKMOTHER_CONSUME_RANGE, src))
 		if (victim.stat == CONSCIOUS)
-			to_chat(victim, span_cult("You feel conscious thought crumble away in an instant as you gaze upon [src]..."))
+			to_chat(victim, span_clown("You experience a feeling of pure, inescapable joy when staring at [src]..."))
 			victim.apply_effect(HONKMOTHER_MESMERIZE_EFFECT, EFFECT_STUN)
 
 /obj/honkmother/Bump(atom/the_atom)
@@ -85,11 +85,11 @@
 	new /obj/structure/lattice/clockwork(our_loc)
 
 /obj/item/stack/sheet/iron/honkmother_act()
-	new /obj/item/stack/sheet/bronze(loc, amount)
+	new /obj/item/stack/sheet/mineral/bananium(loc, amount)
 	qdel(src)
 
 /obj/item/stack/sheet/runed_metal/honkmother_act()
-	new /obj/item/stack/sheet/bronze(loc, amount)
+	new /obj/item/stack/sheet/mineral/bananium(loc, amount)
 	qdel(src)
 
 /turf/honkmother_act(force, ignore_mobs)
