@@ -1,22 +1,23 @@
+//Monkestation's own version of the honkmother, sprite by LME.
+
 #define HONKMOTHER_CONSUME_RANGE 10
 #define HONKMOTHER_GRAV_PULL 10
-#define HONKMOTHERSINGULARITY_SIZE 12
+#define HONKMOTHER_SINGULARITY_SIZE 12
 
-/// The honkmother, the deity of Clowns
+// The honkmother, the Deity of Clowns
 /obj/honkmother
 	name = "honkmother"
 	desc = "You feel mirth rising from your very soul as you gaze upon her."
 	icon = 'monkestation/icons/obj/honkmother.dmi'
 	icon_state = "honkmother"
 	anchored = TRUE
-	appearance_flags = LONG_GLIDE
 	density = FALSE
+	appearance_flags = LONG_GLIDE
 	gender = FEMALE
 	plane = MASSIVE_OBJ_PLANE
-	light_color = COLOR_YELLOW
+	light_color = COLOR_YELLOW //The colour of happiness, and bananas!
 	light_power = 0.9 //brighter than narnar, but not as bright as ratvar
 	light_outer_range = 15
-	light_outer_range = 6
 	move_resist = INFINITY
 	obj_flags = CAN_BE_HIT | DANGEROUS_POSSESSION
 	pixel_x = -236
@@ -29,8 +30,6 @@
 	var/datum/weakref/singularity
 
 /obj/honkmother/Initialize(mapload)
-	. = ..()
-
 	SSpoints_of_interest.make_point_of_interest(src)
 
 	singularity = WEAKREF(AddComponent(
@@ -41,15 +40,50 @@
 		disregard_failed_movements = TRUE, \
 		grav_pull = HONKMOTHER_GRAV_PULL, \
 		roaming = TRUE, \
-		singularity_size = HONKMOTHERSINGULARITY_SIZE, \
+		singularity_size = HONKMOTHER_SINGULARITY_SIZE, \
 	))
 
-	desc = ("That's the Honkomther. Rejoice, for she has arrived.")
-	send_to_playing_players(span_honkmother("!!! THE HONKMOTHER DESCENDS !!!"))
+	log_game("!!! THE HONKMOTHER DESCENDS !!!")
+	send_to_playing_players(span_reallybig("!!! THE HONKMOTHER DESCENDS !!!"))
 	sound_to_playing_players('monkestation/sound/effects/honkmother_descends.ogg')
+	UnregisterSignal(src, COMSIG_ATOM_BSA_BEAM)
+	SSshuttle.registerHostileEnvironment(src)
+	START_PROCESSING(SSobj, src)
 
 	var/area/area = get_area(src)
 	if(area)
 		var/mutable_appearance/alert_overlay = mutable_appearance('monkestation/icons/hud/actions.dmi', "honkmother_alert")
 		notify_ghosts("The Honkkmother has risen in [area]. Reach out to the Lady to be awarded a new mirthful form!", source = src, \
 					alert_overlay = alert_overlay, action = NOTIFY_ATTACK)
+
+/obj/honkmother/attack_ghost(mob/user)
+	makeNew(pick(typesof(/mob/living/simple_animal/hostile/retaliate/clown)), user, loc_override = loc)
+
+/obj/honkmother/process()
+		var/datum/component/singularity/singularity_component = singularity.resolve()
+
+/obj/honkmother/Bump(atom/the_atom)
+	var/turf/the_turf = get_turf(the_atom)
+	if(the_turf == loc)
+		the_turf = get_step(the_atom, the_atom.dir)
+	forceMove(the_turf)
+
+/obj/honkmother/proc/consume(atom/target)
+	if (isturf(target))
+		target.narsie_act()
+
+/obj/honkmother/proc/narsie_spawn_animation()
+	setDir(SOUTH)
+	flick("narsie_spawn_anim", src)
+	addtimer(CALLBACK(src, PROC_REF(narsie_spawn_animation_end)), 3.5 SECONDS)
+
+/obj/honkmother/proc/narsie_spawn_animation_end()
+	var/datum/component/singularity/singularity_component = singularity.resolve()
+	singularity_component?.roaming = TRUE
+
+#undef NARSIE_CHANCE_TO_PICK_NEW_TARGET
+#undef NARSIE_CONSUME_RANGE
+#undef NARSIE_GRAV_PULL
+#undef NARSIE_MESMERIZE_CHANCE
+#undef NARSIE_MESMERIZE_EFFECT
+#undef NARSIE_SINGULARITY_SIZE
