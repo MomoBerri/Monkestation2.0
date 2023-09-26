@@ -46,18 +46,16 @@
 	log_game("!!! THE HONKMOTHER DESCENDS !!!")
 	send_to_playing_players(span_reallybig("!!! THE HONKMOTHER DESCENDS !!!"))
 	sound_to_playing_players('monkestation/sound/effects/honkmother_descends.ogg')
-	UnregisterSignal(src, COMSIG_ATOM_BSA_BEAM)
-	SSshuttle.registerHostileEnvironment(src)
 	START_PROCESSING(SSobj, src)
 
 	var/area/area = get_area(src)
 	if(area)
 		var/mutable_appearance/alert_overlay = mutable_appearance('monkestation/icons/hud/actions.dmi', "honkmother_alert")
-		notify_ghosts("The Honkkmother has risen in [area]. Reach out to the Lady to be awarded a new mirthful form!", source = src, \
-					alert_overlay = alert_overlay, action = NOTIFY_ATTACK)
+		notify_ghosts("The Honkkmother has risen in [area]. Reach out to the Lady to be awarded a new mirthful form!", source = src, alert_overlay = alert_overlay, action = NOTIFY_ATTACK)
+	narsie_spawn_animation()
 
 /obj/honkmother/attack_ghost(mob/user)
-	makeNew(pick(typesof(/mob/living/simple_animal/hostile/retaliate/clown)), user, loc_override = loc)
+	makeNewConstruct(/mob/living/simple_animal/hostile/construct/harvester, user, cultoverride = TRUE, loc_override = loc)
 
 /obj/honkmother/process()
 		var/datum/component/singularity/singularity_component = singularity.resolve()
@@ -70,7 +68,7 @@
 
 /obj/honkmother/proc/consume(atom/target)
 	if (isturf(target))
-		target.narsie_act()
+		target.honkmother_act()
 
 /obj/honkmother/proc/narsie_spawn_animation()
 	setDir(SOUTH)
@@ -81,9 +79,6 @@
 	var/datum/component/singularity/singularity_component = singularity.resolve()
 	singularity_component?.roaming = TRUE
 
-#undef NARSIE_CHANCE_TO_PICK_NEW_TARGET
-#undef NARSIE_CONSUME_RANGE
-#undef NARSIE_GRAV_PULL
-#undef NARSIE_MESMERIZE_CHANCE
-#undef NARSIE_MESMERIZE_EFFECT
-#undef NARSIE_SINGULARITY_SIZE
+#undef HONKMOTHER_CONSUME_RANGE
+#undef HONKMOTHER_GRAV_PULL
+#undef HONKMOTHER_SINGULARITY_SIZE
