@@ -2,8 +2,8 @@
 
 #define HONKMOTHER_CONSUME_RANGE 10
 #define HONKMOTHER_GRAV_PULL 10
-#define NARSIE_MESMERIZE_CHANCE 25
-#define NARSIE_MESMERIZE_EFFECT 60
+#define HONKMOTHER_MESMERIZE_CHANCE 25
+#define HONKMOTHER_MESMERIZE_EFFECT 60
 #define HONKMOTHER_SINGULARITY_SIZE 12
 
 // The honkmother, the Deity of Clowns
@@ -66,7 +66,7 @@
 	for (var/mob/living/carbon/victim in viewers(HONKMOTHER_CONSUME_RANGE, src))
 		if (victim.stat == CONSCIOUS)
 			to_chat(victim, span_cult("You feel conscious thought crumble away in an instant as you gaze upon [src]..."))
-			victim.apply_effect(NARSIE_MESMERIZE_EFFECT, EFFECT_STUN)
+			victim.apply_effect(HONKMOTHER_MESMERIZE_EFFECT, EFFECT_STUN)
 
 /obj/honkmother/Bump(atom/the_atom)
 	var/turf/the_turf = get_turf(the_atom)
@@ -74,9 +74,44 @@
 		the_turf = get_step(the_atom, the_atom.dir)
 	forceMove(the_turf)
 
-/obj/honkmother/proc/consume(atom/target)
-	if (isturf(target))
-		target.narsie_act()
+//act
+
+/atom/proc/honkmother_act()
+	SEND_SIGNAL(src, COMSIG_ATOM_HONKMOTHER_ACT)
+
+/obj/structure/lattice/honkmother_act()
+	var/our_loc = loc
+	qdel(src)
+	new /obj/structure/lattice/clockwork(our_loc)
+
+/obj/item/stack/sheet/iron/honkmother_act()
+	new /obj/item/stack/sheet/bronze(loc, amount)
+	qdel(src)
+
+/obj/item/stack/sheet/runed_metal/honkmother_act()
+	new /obj/item/stack/sheet/bronze(loc, amount)
+	qdel(src)
+
+/turf/honkmother_act(force, ignore_mobs)
+	. = (prob(60) || force)
+	for(var/atom/checked_atom in src)
+		if(ignore_mobs && ismob(checked_atom))
+			continue
+		if(ismob(checked_atom) || .)
+			checked_atom.honkmother_act()
+
+/turf/open/floor/honkmother_act(force, ignore_mobs)
+	. = ..()
+	if(.)
+		ChangeTurf(/turf/open/indestructible/reebe_flooring, flags = CHANGETURF_INHERIT_AIR)
+
+/turf/closed/wall/honkmother_act(force, ignore_mobs)
+	. = ..()
+	if(.)
+		ChangeTurf(/turf/closed/wall/clockwork)
+
+/obj/honkmother/proc/consume(atom/consumed)
+	consumed.honkmother_act()
 
 /obj/honkmother/proc/narsie_spawn_animation()
 	setDir(SOUTH)
@@ -90,3 +125,5 @@
 #undef HONKMOTHER_CONSUME_RANGE
 #undef HONKMOTHER_GRAV_PULL
 #undef HONKMOTHER_SINGULARITY_SIZE
+#undef HONKMOTHER_MESMERIZE_CHANCE
+#undef HONKMOTHER_MESMERIZE_EFFECT
