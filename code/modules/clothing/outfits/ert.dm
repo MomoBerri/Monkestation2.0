@@ -568,3 +568,35 @@
 	head = /obj/item/clothing/head/beret/militia
 	l_hand = /obj/item/megaphone
 	suit_store = /obj/item/gun/energy/laser/musket/prime
+
+/datum/outfit/centcom/ert/engineering_emergency/engineer
+	name = "Centcom Engineer"
+
+	id = /obj/item/card/id/advanced/centcom/ert/engineering_emergency
+	belt = /obj/item/storage/belt/utility/full/powertools
+	glasses = /obj/item/clothing/glasses/meson/engine
+	l_pocket = /obj/item/rcd_ammo/large
+	r_pocket = /obj/item/rcd_ammo/large
+	suit = /obj/item/clothing/suit/space/hardsuit/engine
+	head = /obj/item/clothing/head/helmet/space/hardsuit/engine
+	ears = /obj/item/radio/headset/headset_cent/alt
+	uniform = /obj/item/clothing/under/rank/engineering/engineer/hazard
+	back = /obj/item/storage/backpack/ert/engineer
+	additional_radio = /obj/item/encryptionkey/headset_eng
+	box = /obj/item/storage/box/survival/centcom
+	gloves = /obj/item/clothing/gloves/color/yellow
+	mask = /obj/item/clothing/mask/gas/atmos
+	shoes = /obj/item/clothing/shoes/magboots
+	backpack_contents = list(
+		/obj/item/construction/rcd/loaded/upgraded = 1,
+		/obj/item/pipe_dispenser = 1,
+		/obj/item/stack/sheet/glass/fifty = 1,
+		/obj/item/stack/sheet/iron/fifty = 1,
+		/obj/item/stack/sheet/plasteel/twenty = 1,
+	)
+
+/datum/outfit/centcom/ert/medical_emergency/medic
+
+/datum/outfit/centcom/ert/silicon_strut/silicon
+
+/datum/outfit/centcom/ert/mimicry_menace/mime

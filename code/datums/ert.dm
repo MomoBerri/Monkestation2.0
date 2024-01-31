@@ -126,3 +126,43 @@
 	mission = "Having heard the station's request for aid, assist the crew in defending themselves."
 	polldesc = "an independent station defense militia"
 	random_names = TRUE
+
+/datum/ert/engineering_emergency
+	roles = list(/datum/antagonist/ert/engineering_emergency/engineer)
+	leader_role = /datum/antagonist/ert/engineering_emergency/engineer
+	teamsize = 3
+	opendoors = FALSE
+	rename_team = "Engineering Response Team"
+	mission = "Having heard the station's request for aid, assist the crew in repairing and bringing power to faculties."
+	polldesc = "a Nanotrasen Engineering Response Team"
+	random_names = TRUE
+
+/datum/ert/medical_emergency
+	roles = list(/datum/antagonist/ert/engineering_emergency/engineer)
+	leader_role = /datum/antagonist/ert/engineering_emergency/engineer
+	teamsize = 4
+	opendoors = FALSE
+	rename_team = "Medical Response Team"
+	mission = "Having heard the station's request for aid, assist the crew in rescuing the injured and giving medical attention to those in need."
+	polldesc = "a Nanotrasen Medical Response Team"
+	random_names = TRUE
+
+/datum/ert/silicon_strut
+	roles = list(/datum/antagonist/ert/engineering_emergency/engineer)
+	leader_role = /datum/antagonist/ert/engineering_emergency/engineer
+	teamsize = 2
+	opendoors = FALSE
+	rename_team = "Silicon Service Team"
+	mission = "The crew require additional processing power, and you're fit for the job."
+	polldesc = "a Nanotrasen Silicon Service Team"
+	random_names = TRUE
+
+/datum/ert/mimicry_menace
+	roles = list(/datum/antagonist/ert/engineering_emergency/engineer)
+	leader_role = /datum/antagonist/ert/engineering_emergency/engineer
+	teamsize = 2
+	opendoors = FALSE
+	rename_team = "Mimicry Service Team"
+	mission = "The crew scored low on their emotional feedback scores, we're sending you in to improve the next report."
+	polldesc = "a Nanotrasen Mimicry Service Team"
+	random_names = FALSE

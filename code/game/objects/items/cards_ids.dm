@@ -1154,6 +1154,24 @@
 	registered_name = "Frontier Militia General"
 	trim = /datum/id_trim/centcom/ert/militia/general
 
+/obj/item/card/id/advanced/centcom/ert/engineering_emergency
+	registered_name = "Emergency Engineer"
+	trim = /datum/id_trim/centcom/ert/engineer
+
+/obj/item/card/id/advanced/centcom/ert/
+	registered_name = "Emergency Engineer"
+	trim = /datum/id_trim/centcom/ert/medical
+
+/obj/item/card/id/advanced/centcom/ert/
+	registered_name = "Emergency Engineer"
+	trim = /datum/id_trim/centcom/ert/medical
+
+/obj/item/card/id/advanced/centcom/ert/
+	registered_name = "Emergency Engineer"
+
+/obj/item/card/id/advanced/centcom/ert/
+	registered_name = "Emergency Engineer"
+
 /obj/item/card/id/advanced/black
 	name = "black identification card"
 	desc = "This card is telling you one thing and one thing alone. The person holding this card is an utter badass."

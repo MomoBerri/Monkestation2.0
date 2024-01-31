@@ -285,3 +285,8 @@
 	name = "Frontier Militia General"
 	outfit = /datum/outfit/centcom/militia/general
 	role = "Minuteman Leader"
+
+/datum/antagonist/ert/engineering_emergency/engineer
+	name = "Emergency Engineer"
+	outfit = /datum/outfit/centcom/ert/engineering_emergency/engineer
+	role = "Emergency Engineer"

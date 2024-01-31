@@ -287,3 +287,11 @@
 	uniform = /obj/item/clothing/under/plasmaman/bitrunner
 	gloves = /obj/item/clothing/gloves/color/plasmaman/black
 	head = /obj/item/clothing/head/helmet/space/plasmaman/bitrunner
+
+/datum/outfit/plasmaman/engineering_emergency
+	name = "Emergency Engineer Plasmaman"
+
+	uniform = /obj/item/clothing/under/plasmaman/engineering
+	gloves = /obj/item/clothing/gloves/color/plasmaman/engineer
+	head = /obj/item/clothing/head/helmet/space/plasmaman/engineering
+	mask = /obj/item/clothing/mask/gas/atmos/plasmaman
