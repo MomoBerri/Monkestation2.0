@@ -55381,8 +55381,8 @@
 /area/station/security/courtroom)
 "qRG" = (
 /obj/effect/spawner/random_engines/theseus,
-/turf/open/space/basic,
-/area/space)
+/turf/closed/wall/r_wall,
+/area/station/engineering/storage)
 "qRM" = (
 /obj/structure/rack,
 /obj/item/gun/energy/laser{
@@ -114997,7 +114997,7 @@ lXw
 lXw
 lXw
 kvE
-oSj
+qRG
 oSj
 oSj
 oSj
@@ -115254,7 +115254,7 @@ nhC
 nhC
 nhC
 nhC
-qRG
+nhC
 pXK
 qsb
 sax
