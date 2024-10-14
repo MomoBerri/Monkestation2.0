@@ -55379,6 +55379,10 @@
 /obj/item/kirbyplants/random,
 /turf/open/floor/carpet/red,
 /area/station/security/courtroom)
+"qRG" = (
+/obj/effect/spawner/random_engines/theseus,
+/turf/open/space/basic,
+/area/space)
 "qRM" = (
 /obj/structure/rack,
 /obj/item/gun/energy/laser{
@@ -115250,7 +115254,7 @@ nhC
 nhC
 nhC
 nhC
-nhC
+qRG
 pXK
 qsb
 sax

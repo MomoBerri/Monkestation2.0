@@ -134,7 +134,10 @@
 	room_width = 20
 	room_height = 21
 
-
+/obj/effect/spawner/random_engines/theseus
+	name = "theseus engine spawner"
+	room_width = 27
+	room_height = 25
 
 /obj/effect/spawner/random_bar
 	name = "random bar spawner"
